@@ -160,6 +160,7 @@ const AddPartner = ({ onClose, onAdd }) => {
                         value={websiteUrl}
                         onChange={e => setWebsiteUrl(e.target.value)}
                         style={{ width: "100%", marginBottom: 12, padding: "0.3rem", border: "1.5px solid #1E221A", borderRadius: "4px", color: "#1E221A", fontWeight: 400, fontFamily: "'adventPro', sans-serif" }}
+                        notRequired
                     />
                 </label>
                 <label style={{ fontFamily: "'adventPro', sans-serif", marginTop: "-0.5rem", fontWeight: 600, color: "#1E221A" }}>
