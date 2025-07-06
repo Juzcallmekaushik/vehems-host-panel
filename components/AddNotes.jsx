@@ -44,7 +44,7 @@ const AddNotes = ({ onClose }) => {
             const { error: notifError } = await supabase
                 .from('notifications')
                 .insert([{
-                    notification: `NEW! "${title}" has been uploaded !! check it out in ${level.toUpperCase()}`,
+                    notification: `NEW! ${title} has been uploaded !!`,
                 }]);
 
             if (error) {

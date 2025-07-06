@@ -44,7 +44,7 @@ const AddPartner = ({ onClose, onAdd }) => {
                 const { error: notifError } = await supabase
                     .from('notifications')
                     .insert([{
-                        notification: `NEW PARTNER - "${title}" !! Check out Partners for more info.`,
+                        notification: `NEW PARTNER - ${title} !! Check out Partners for more info.`,
                     }]);
                 if (notifError) {
                     console.error('Error adding notification:', notifError);
