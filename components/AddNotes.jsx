@@ -6,7 +6,6 @@ const AddNotes = ({ onClose }) => {
     const supabase = createClient();
     const [isVisible, setIsVisible] = useState(false);
 
-    // All fields start empty
     const [title, setTitle] = useState("");
     const [level, setLevel] = useState("");
     const [fileUrl, setFileUrl] = useState("");
@@ -31,7 +30,7 @@ const AddNotes = ({ onClose }) => {
         setSaving(true);
 
         try {
-            const { data, error } = await supabase
+            const { error } = await supabase
                 .from('notes')
                 .insert([{
                     title: title,
@@ -42,9 +41,21 @@ const AddNotes = ({ onClose }) => {
                 }])
                 .select();
 
+            const { error: notifError } = await supabase
+                .from('notifications')
+                .insert([{
+                    type: 'note_added',
+                    message: `NEW! "${title}" has been uploaded !! check it out in ${level.toUpperCase()}`,
+                    created_at: new Date().toISOString(),
+                }]);
+
             if (error) {
                 console.error('Error adding note:', error);
                 alert('Error adding note: ' + error.message);
+            } else if (notifError) {
+                console.error('Error adding notification:', notifError);
+                alert('Note added, but failed to add notification: ' + notifError.message);
+                handleClose();
             } else {
                 handleClose();
             }

@@ -39,6 +39,20 @@ const AddPartner = ({ onClose, onAdd }) => {
                 }])
                 .select();
 
+            if (!error && data && data[0]) {
+                const level = "partners";
+                const { error: notifError } = await supabase
+                    .from('notifications')
+                    .insert([{
+                        type: 'note_added',
+                        message: `NEW PARTNER - "${title}" !! Check out Partners for more info.`,
+                        created_at: new Date().toISOString(),
+                    }]);
+                if (notifError) {
+                    console.error('Error adding notification:', notifError);
+                }
+            }
+
             if (error) {
                 console.error('Error adding partner:', error);
                 alert('Error adding partner: ' + error.message);
