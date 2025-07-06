@@ -61,7 +61,7 @@ export default function HomePage() {
             window.removeEventListener('resize', checkScreenSize);
             document.removeEventListener('click', handleClickOutside);
         };
-    }, []);
+    }, [showDropdown]);
 
     return (
         <>
