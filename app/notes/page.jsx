@@ -36,7 +36,7 @@ export default function HomePage() {
             setLoading(true);
             const { data, error } = await supabase
                 .from('notes')
-                .select('id, title, level, image_url, read_time, file_url, created_at');
+                .select('title, level, image_url, read_time, file_url, created_at');
             if (!error) setNotes(data || []);
             setLoading(false);
         }
